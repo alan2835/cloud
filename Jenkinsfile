@@ -69,33 +69,7 @@ pipeline {
 			}
 		}
 	}
-}	
-	/*	
-    steps {
-      nexusArtifactUploader {
-        nexusVersion('nexus2')
-        protocol('http')
-        nexusUrl('192.168.40.128:8081/nexus')
-        groupId('sp.sd')
-        version('2.4')
-        repository('NexusArtifactUploader')
-        credentialsId('44620c50-1589-4617-a677-7563985e46e1')
-        artifact {
-            artifactId('nexus-artifact-uploader')
-            type('jar')
-            classifier('debug')
-            file('nexus-artifact-uploader.jar')
-        }
-        artifact {
-            artifactId('nexus-artifact-uploader')
-            type('hpi')
-            classifier('debug')
-            file('nexus-artifact-uploader.hpi')
-        }
-	  } 
-	}
-		
-		
+	
 	post {
 		success {
 			slackSend (color: '#00FF00', message: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})") 
@@ -103,4 +77,5 @@ pipeline {
 		failure {
 			slackSend (color: '#FF0000', message: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})") 
 		}
-	}*/
+	}
+}	
