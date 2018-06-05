@@ -41,10 +41,10 @@ pipeline {
 			}
 		}
 		
-		/*stage('Results') {
-			junit '**/target/surefire-reports/TEST-*.xml'
+		stage('Results') {
+			junit 'target/surefire-reports/TEST-*.xml'
 			archive 'target/*.jar'
-		}*/
+		}
 		
 		stage('Publish') {
 			when {
