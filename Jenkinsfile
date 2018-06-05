@@ -7,7 +7,7 @@ pipeline {
 	}
 	
     parameters {
-        string(name: 'RIC Project A', defaultValue: 'RIC Project', description: 'What is this project about')
+        string(RIC: 'PROJECT', defaultValue: 'RIC Project', description: 'What is this project about')
     }
 	
     stages {
@@ -16,7 +16,7 @@ pipeline {
 				sh '''
 					echo "PATH = ${PATH}"
 					echo "M2_HOME = ${M2_HOME}"
-					echo "Hello ${params.name}"
+					echo "Hello ${params.PROJECT}"
 				'''
             }
         }
