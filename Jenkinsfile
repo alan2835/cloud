@@ -53,18 +53,20 @@ pipeline {
 				branch "master"
 			}
 			
-			nexusPublisher \
-				nexusInstanceId: 'repo', \
-				nexusRepositoryId: 'releases', \
-				packages: \
-					[[$class: 'MavenPackage', \
-						mavenAssetList: [[classifier: '', \
-							extension: '', \
-							filePath: 'target/cloud-0.0.1-SNAPSHOT.jar']], \
-						mavenCoordinate: [artifactId: 'cloud', \
-							groupId: 'com.alan.ham', \
-							packaging: 'jar', \
-							version: '0.0.1-SNAPSHOT']]]
+			steps{
+				nexusPublisher \
+					nexusInstanceId: 'repo', \
+					nexusRepositoryId: 'releases', \
+					packages: \
+						[[$class: 'MavenPackage', \
+							mavenAssetList: [[classifier: '', \
+								extension: '', \
+								filePath: 'target/cloud-0.0.1-SNAPSHOT.jar']], \
+							mavenCoordinate: [artifactId: 'cloud', \
+								groupId: 'com.alan.ham', \
+								packaging: 'jar', \
+								version: '0.0.1-SNAPSHOT']]]
+			}
 		}
 	}
 }	
