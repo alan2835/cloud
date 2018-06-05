@@ -6,9 +6,9 @@ pipeline {
 		jdk 'Java8'
 	}
 	
-    parameters {
-        string(RIC: 'PROJECT', defaultValue: 'RIC Project', description: 'What is this project about')
-    }
+   /* parameters {
+        string(name: 'PROJECT', defaultValue: 'RIC Project', description: 'What is this project about')
+    } */
 	
     stages {
         stage('initialize') {
@@ -16,7 +16,6 @@ pipeline {
 				sh '''
 					echo "PATH = ${PATH}"
 					echo "M2_HOME = ${M2_HOME}"
-					echo "Hello ${params.PROJECT}"
 				'''
             }
         }
