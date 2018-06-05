@@ -6,10 +6,6 @@ pipeline {
 		jdk 'Java8'
 	}
 	
-   /* parameters {
-        string(name: 'PROJECT', defaultValue: 'RIC Project', description: 'What is this project about')
-    } */
-	
     stages {
         stage('initialize') {
             steps {
@@ -20,6 +16,12 @@ pipeline {
             }
         }
 		
+        stage('Compile') {
+            steps {
+                sh 'mvn -B clean compile'
+            }
+        }
+		
         stage('Build') {
             steps {
                 sh 'mvn -B clean verify'
@@ -27,6 +29,9 @@ pipeline {
         }
 		
 		stage ('SonarQube Analysis'){
+			when {
+				branch "master"
+			}
 			steps{
 				sh '''
 					mvn sonar:sonar \
@@ -36,41 +41,64 @@ pipeline {
 			}
 		}
 		
+		stage('Results') {
+			junit '**/target/surefire-reports/TEST-*.xml'
+			archive 'target/*.jar'
+		}
 		
-	/*	stage ('SonarQube Analysis'){
+		stage('Publish') {
 			when {
 				branch "master"
 			}
-			steps{
-				dir("project_templates/java_project_template"){
-					withSonarQubeEnv('SonarQube5.3') {
-						sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.2:sonar'
-					}
-				}
-			}
-		}
+			
+			nexusPublisher 
+				nexusInstanceId: 'repo', 
+				nexusRepositoryId: 'releases', 
+				packages: 
+					[[$class: 'MavenPackage', 
+						mavenAssetList: [[classifier: '', 
+							extension: '', 
+							filePath: 'target/cloud-0.0.1-SNAPSHOT.jar']], 
+						mavenCoordinate: [artifactId: 'cloud', 
+							groupId: 'com.alan.ham', 
+							packaging: 'jar', 
+							version: '0.0.1-SNAPSHOT']]]
+	}
 		
+	/*	
 		stage ('Artifactory Deploy'){
 			when {
 				branch "master"
 			}
-			steps{
-				dir("project_templates/java_project_template"){
-					script {
-						def server = Artifactory.server('artifactory')
-						def rtMaven = Artifactory.newMavenBuild()
-						rtMaven.resolver server: server, releaseRepo: 'libs-release', snapshotRepo: 'libs-snapshot'
-						rtMaven.deployer server: server, releaseRepo: 'libs-release-local', snapshotRepo: 'libs-snapshot-local'
-						rtMaven.tool = 'maven 3'
-						def buildInfo = rtMaven.run pom: 'pom.xml', goals: 'install'
-						server.publishBuildInfo buildInfo
-					}
-				}
-			}
-		} */
+			
+    steps {
+      nexusArtifactUploader {
+        nexusVersion('nexus2')
+        protocol('http')
+        nexusUrl('192.168.40.128:8081/nexus')
+        groupId('sp.sd')
+        version('2.4')
+        repository('NexusArtifactUploader')
+        credentialsId('44620c50-1589-4617-a677-7563985e46e1')
+        artifact {
+            artifactId('nexus-artifact-uploader')
+            type('jar')
+            classifier('debug')
+            file('nexus-artifact-uploader.jar')
+        }
+        artifact {
+            artifactId('nexus-artifact-uploader')
+            type('hpi')
+            classifier('debug')
+            file('nexus-artifact-uploader.hpi')
+        }
+	}
+}
+}
+		
     }
 		
-	/*post {
+	post {
 		success {
 			slackSend (color: '#00FF00', message: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})") 
 		}
