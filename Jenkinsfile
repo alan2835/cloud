@@ -66,11 +66,6 @@ pipeline {
 	}
 		
 	/*	
-		stage ('Artifactory Deploy'){
-			when {
-				branch "master"
-			}
-			
     steps {
       nexusArtifactUploader {
         nexusVersion('nexus2')
@@ -92,11 +87,9 @@ pipeline {
             classifier('debug')
             file('nexus-artifact-uploader.hpi')
         }
+	  } 
 	}
-}
-}
 		
-    }
 		
 	post {
 		success {
