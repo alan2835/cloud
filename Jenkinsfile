@@ -63,8 +63,9 @@ pipeline {
 							groupId: 'com.alan.ham', \
 							packaging: 'jar', \
 							version: '0.0.1-SNAPSHOT']]]
+		}
 	}
-		
+}	
 	/*	
     steps {
       nexusArtifactUploader {
@@ -99,4 +100,3 @@ pipeline {
 			slackSend (color: '#FF0000', message: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})") 
 		}
 	}*/
-}
