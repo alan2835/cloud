@@ -25,6 +25,24 @@
 		<spring-cloud.version>Finchley.RC2</spring-cloud.version>
 	</properties>
 
+	<distributionManagement>
+		<site>
+			<id>cloud</id>
+			<name>Cloud Website</name>
+			<url>https://192.168.40.128:8080/view/RIC/job/ric-dataminer-master-reports/maven-reports/</url>
+		</site>
+		<repository>
+			<id>CloudReleases</id>
+			<name>Localhost Nexus Private Releases</name>
+			<url>http://192.168.40.128:8081/nexus/content/repositories/Releases/</url>
+		</repository>
+		<snapshotRepository>
+			<id>CloudSnapshot</id>
+			<name>Localhost Nexus Private Snapshot</name>
+			<url>http://192.168.40.128:8081/nexus/content/repositories/Snapshots/</url>
+		</snapshotRepository>
+	</distributionManagement>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -99,6 +117,4 @@
 			</snapshots>
 		</repository>
 	</repositories>
-
-
 </project>
