@@ -34,12 +34,12 @@
 		<repository>
 			<id>InternalReleases</id>
 			<name>Localhost Nexus Private Releases</name>
-			<url>http://192.168.40.128:8081/nexus/content/repositories/Releases/</url>
+			<url>http://192.168.40.128:8081/nexus/content/repositories/releases/</url>
 		</repository>
 		<snapshotRepository>
 			<id>InternalSnapshot</id>
 			<name>Localhost Nexus Private Snapshot</name>
-			<url>http://192.168.40.128:8081/nexus/content/repositories/Snapshots/</url>
+			<url>http://192.168.40.128:8081/nexus/content/repositories/snapshots/</url>
 		</snapshotRepository>
 	</distributionManagement>
 
