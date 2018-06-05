@@ -9,8 +9,8 @@ pipeline {
     parameters {
         string(name: 'RIC Project A', defaultValue: 'RIC Project', description: 'What is this project about')
     }
-    stages {
 	
+    stages {
         stage('initialize') {
             steps {
 				sh '''
@@ -58,17 +58,17 @@ pipeline {
 				}
 			}
 		}
-		
-		post {
-			when {
-				branch "master"
-			}
-			success {
-				slackSend (color: '#00FF00', message: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})") 
-			}
-			failure {
-				slackSend (color: '#FF0000', message: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})") 
-			}
-		}
     }
+		
+	post {
+		when {
+			branch "master"
+		}
+		success {
+			slackSend (color: '#00FF00', message: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})") 
+		}
+		failure {
+			slackSend (color: '#FF0000', message: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})") 
+		}
+	}
 }
