@@ -61,7 +61,7 @@ pipeline {
 						[[$class: 'MavenPackage', \
 							mavenAssetList: [[classifier: '', \
 								extension: '', \
-								filePath: 'target/cloud-0.0.1*.jar']], \
+								filePath: 'target/cloud-0.0.1.jar']], \
 							mavenCoordinate: [artifactId: 'cloud', \
 								groupId: 'com.alan.ham', \
 								packaging: 'jar', \
