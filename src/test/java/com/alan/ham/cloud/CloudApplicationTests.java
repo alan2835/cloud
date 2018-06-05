@@ -1,5 +1,6 @@
 package com.alan.ham.cloud;
 
+import javax.validation.constraints.AssertFalse;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -11,6 +12,6 @@ public class CloudApplicationTests {
 
 	@Test
 	public void contextLoads() {
+		assert (1==1);
 	}
-
 }
