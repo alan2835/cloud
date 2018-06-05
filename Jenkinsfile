@@ -20,16 +20,27 @@ pipeline {
             }
         }
 		
-        stage('Build ${params.name}') {
-			when {
-				branch "master"
-			}
+        stage('Build') {
             steps {
                 sh 'mvn -B clean verify'
             }
         }
 		
 		stage ('SonarQube Analysis'){
+			steps{
+				sh '''
+					mvn sonar:sonar \
+						-Dsonar.host.url=http://192.168.40.128:9000 \
+						-Dsonar.login=bf56bf0e765277ac1029d70745152b16fa951aa7
+				'''
+			}
+		}
+		
+		
+	/*	stage ('SonarQube Analysis'){
+			when {
+				branch "master"
+			}
 			steps{
 				dir("project_templates/java_project_template"){
 					withSonarQubeEnv('SonarQube5.3') {
@@ -56,7 +67,7 @@ pipeline {
 					}
 				}
 			}
-		}
+		} */
     }
 		
 	/*post {
