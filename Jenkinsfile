@@ -36,15 +36,15 @@ pipeline {
 				sh '''
 					mvn sonar:sonar \
 						-Dsonar.host.url=http://192.168.40.128:9000 \
-						-Dsonar.login=bf56bf0e765277ac1029d70745152b16fa951aa7
+						-Dsonar.login=e974bbf96bff04f5a39ad39aff3134e4bf886031
 				'''
 			}
 		}
 		
-		stage('Results') {
+		/*stage('Results') {
 			junit '**/target/surefire-reports/TEST-*.xml'
 			archive 'target/*.jar'
-		}
+		}*/
 		
 		stage('Publish') {
 			when {
