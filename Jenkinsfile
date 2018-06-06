@@ -72,10 +72,18 @@ pipeline {
 	
 	post {
 		success {
-			slackSend (color: '#00FF00', message: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})") 
+			slackSend baseUrl: 'https://ahamrick.slack.com/services/hooks/jenkins-ci/', \
+				channel: '#jenkins', \
+				color: '00FF00', \
+				message: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})", \
+				token: 'ben0Y1yZlaSZO5nwQrGqglfB'
 		}
 		failure {
-			slackSend (color: '#FF0000', message: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})") 
+			slackSend baseUrl: 'https://ahamrick.slack.com/services/hooks/jenkins-ci/', \
+				channel: '#jenkins', \
+				color: 'FF0000', \
+				message: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})", \
+				token: 'ben0Y1yZlaSZO5nwQrGqglfB'
 		}
 	}
 }	
