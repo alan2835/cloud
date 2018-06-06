@@ -7,7 +7,7 @@ pipeline {
 	}
 	
     stages {
-        stage('initialize') {
+        stage('Initialize') {
             steps {
 				sh '''
 					echo "PATH = ${PATH}"
@@ -36,7 +36,7 @@ pipeline {
 				sh '''
 					mvn sonar:sonar \
 						-Dsonar.host.url=http://192.168.40.128:9000 \
-						-Dsonar.login=e974bbf96bff04f5a39ad39aff3134e4bf886031
+						-Dsonar.login=0a703ed62f00ff8b5b31a511507dc3d670fcc078
 				'''
 			}
 		}
@@ -69,38 +69,13 @@ pipeline {
 			}
 		}
 	}
-}	
-	/*	
-    steps {
-      nexusArtifactUploader {
-        nexusVersion('nexus2')
-        protocol('http')
-        nexusUrl('192.168.40.128:8081/nexus')
-        groupId('sp.sd')
-        version('2.4')
-        repository('NexusArtifactUploader')
-        credentialsId('44620c50-1589-4617-a677-7563985e46e1')
-        artifact {
-            artifactId('nexus-artifact-uploader')
-            type('jar')
-            classifier('debug')
-            file('nexus-artifact-uploader.jar')
-        }
-        artifact {
-            artifactId('nexus-artifact-uploader')
-            type('hpi')
-            classifier('debug')
-            file('nexus-artifact-uploader.hpi')
-        }
-	  } 
-	}
-		
-		
+	
 	post {
 		success {
-			slackSend (color: '#00FF00', message: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})") 
+			slackSend baseUrl: 'https://ahamrick.slack.com/services/hooks/jenkins-ci/', channel: '#jenkins', color: '00FF00', message: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})", token: 'ben0Y1yZlaSZO5nwQrGqglfB'
 		}
 		failure {
-			slackSend (color: '#FF0000', message: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})") 
+			slackSend baseUrl: 'https://ahamrick.slack.com/services/hooks/jenkins-ci/', channel: '#jenkins', color: 'FF0000', message: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})", token: 'ben0Y1yZlaSZO5nwQrGqglfB'
 		}
-	}*/
+	}
+}	
