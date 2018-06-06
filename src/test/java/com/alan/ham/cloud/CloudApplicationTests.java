@@ -12,6 +12,6 @@ public class CloudApplicationTests {
 
 	@Test
 	public void contextLoads() {
-		assert (2==2);
+		assert (1==1);
 	}
 }
