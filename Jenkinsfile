@@ -7,7 +7,7 @@ pipeline {
 	}
 	
     stages {
-        stage('initialize') {
+        stage('Initialize') {
             steps {
 				sh '''
 					echo "PATH = ${PATH}"
@@ -36,7 +36,7 @@ pipeline {
 				sh '''
 					mvn sonar:sonar \
 						-Dsonar.host.url=http://192.168.40.128:9000 \
-						-Dsonar.login=e974bbf96bff04f5a39ad39aff3134e4bf886031
+						-Dsonar.login=0a703ed62f00ff8b5b31a511507dc3d670fcc078
 				'''
 			}
 		}
